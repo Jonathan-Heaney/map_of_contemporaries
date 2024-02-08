@@ -7,10 +7,12 @@ import random
 
 # Function to retrieve a random person from the database
 def random_person(request):
-    person_count = FamousPerson.objects.count()
+    valid_persons = FamousPerson.objects.exclude(birthyear__isnull=True).exclude(deathyear__isnull=True)
+    person_count = valid_persons.count()
     random_index = random.randint(0, person_count - 1)
     person = FamousPerson.objects.all()[random_index]
     return JsonResponse({
+        'id': person.id,
         'name': person.name,
         'occupation': person.occupation,
         'birthyear': person.birthyear,
@@ -50,6 +52,7 @@ def top_overlap(request, person_id):
     top_overlaps = overlaps[:10]
 
     response_data = [{
+        'id': person.id,
         'name': person.name,
         'overlap_percentage': overlap_percentage,
         'occupation': person.occupation,
@@ -78,6 +81,7 @@ def fame_overlap(request, person_id):
     top_fame_overlaps = fame_overlaps[:10]
 
     response_data = [{
+        'id': person.id,
         'name': person.name,
         'overlap_percentage': overlap_percentage,
         'fame_overlap_score': fame_overlap_score,
