@@ -7,7 +7,8 @@ import random
 
 # Function to retrieve a random person from the database
 def random_person(request):
-    person_count = FamousPerson.objects.count()
+    valid_persons = FamousPerson.objects.exclude(birthyear__isnull=True).exclude(deathyear__isnull=True)
+    person_count = valid_persons.count()
     random_index = random.randint(0, person_count - 1)
     person = FamousPerson.objects.all()[random_index]
     return JsonResponse({
