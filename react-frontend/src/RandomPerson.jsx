@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
-function RandomPerson({ setRandomPerson }) {
-  const [person, setPerson] = useState(null);
-
-  const fetchRandomPerson = async () => {
-    try {
-      const response = await axios.get('http://localhost:8000/random_person/');
-      setPerson(response.data);
-    } catch (error) {
-      console.error('There was an error fetching the random person:', error);
-    }
-  };
-
+function RandomPerson({ fetchRandomPerson, person }) {
   return (
     <div>
       <button onClick={fetchRandomPerson}>Generate Random Person</button>
+      {person && (
+        <div>
+          <p>Name: {person.name}</p>
+        </div>
+      )}
     </div>
   );
 }
+
+export default RandomPerson;
