@@ -4,7 +4,6 @@ import PersonDetail from './PersonDetail';
 function RandomPerson({ fetchRandomPerson, person }) {
   return (
     <div>
-      <button onClick={fetchRandomPerson}>Generate Random Person</button>
       {person && (
         <div>
           <p>Name: {person.name}</p>
@@ -13,9 +12,9 @@ function RandomPerson({ fetchRandomPerson, person }) {
           <p>Death Year: {person.deathyear}</p>
           <p>Overlap Percentage: {person.overlap_percentage}</p>
           <p>Fame Score: {person.hpi}</p>
-          <br />
         </div>
       )}
+      <button onClick={fetchRandomPerson}>Generate Random Person</button>
     </div>
   );
 }
