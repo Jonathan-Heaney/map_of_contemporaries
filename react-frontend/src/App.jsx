@@ -3,6 +3,7 @@ import RandomPerson from './RandomPerson';
 import OverlapList from './OverlapList';
 import FameOverlapList from './FameOverlapList';
 import axios from 'axios';
+import './App.css';
 
 function App() {
   const [randomPerson, setRandomPerson] = useState(null);
@@ -37,13 +38,15 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="Container">
       <RandomPerson
         fetchRandomPerson={fetchRandomPerson}
         person={randomPerson}
       ></RandomPerson>
-      <OverlapList people={overlapList}></OverlapList>
-      <FameOverlapList people={fameOverlapList}></FameOverlapList>
+      <div className="lists">
+        <OverlapList people={overlapList}></OverlapList>
+        <FameOverlapList people={fameOverlapList}></FameOverlapList>
+      </div>
     </div>
   );
 }

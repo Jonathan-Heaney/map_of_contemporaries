@@ -10,7 +10,7 @@ def random_person(request):
     valid_persons = FamousPerson.objects.exclude(birthyear__isnull=True).exclude(deathyear__isnull=True)
     person_count = valid_persons.count()
     random_index = random.randint(0, person_count - 1)
-    person = FamousPerson.objects.all()[random_index]
+    person = valid_persons.all()[random_index]
     return JsonResponse({
         'id': person.id,
         'name': person.name,
@@ -30,7 +30,8 @@ def calculate_overlap_percentage(person1, person2):
     earliest_end = min(person1.deathyear, person2.deathyear)
     overlap = max(0, earliest_end - latest_start)
     person1_lifespan = person1.deathyear - person1.birthyear
-    return (overlap / person1_lifespan) * 100 if person1_lifespan > 0 else 0
+    overlap_percentage = (overlap / person1_lifespan) * 100 if person1_lifespan > 0 else 0
+    return round(overlap_percentage, 2)
 
 
 def top_overlap(request, person_id):

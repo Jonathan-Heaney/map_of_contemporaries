@@ -2,7 +2,7 @@ import React from 'react';
 
 function PersonDetail({ person }) {
   return (
-    <div>
+    <div className="person-card">
       <p>Name: {person.name}</p>
       <p>Occupation: {person.occupation}</p>
       <p>Birth Year: {person.birthyear}</p>

@@ -1,0 +1,64 @@
+/* Basic Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 5rem;
+}
+
+.container {
+  padding: 20px;
+}
+
+/* Centering the button and random person details */
+.random-person {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.generate-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.generate-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Styling for person cards */
+.person-card {
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Lists alignment */
+.lists {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  margin-bottom: 20px;
+}
+
+/* Media Query for Desktop */
+@media (min-width: 768px) {
+  .lists {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .list {
+    width: 48%; /* Slightly less than half the container width to fit side by side */
+  }
+}

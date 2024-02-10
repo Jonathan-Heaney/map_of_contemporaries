@@ -3,18 +3,19 @@ import PersonDetail from './PersonDetail';
 
 function RandomPerson({ fetchRandomPerson, person }) {
   return (
-    <div>
+    <div className="random-person">
       {person && (
-        <div>
+        <div className="person-card">
           <p>Name: {person.name}</p>
           <p>Occupation: {person.occupation}</p>
           <p>Birth Year: {person.birthyear}</p>
           <p>Death Year: {person.deathyear}</p>
-          <p>Overlap Percentage: {person.overlap_percentage}</p>
           <p>Fame Score: {person.hpi}</p>
         </div>
       )}
-      <button onClick={fetchRandomPerson}>Generate Random Person</button>
+      <button className="generate-btn" onClick={fetchRandomPerson}>
+        Generate Random Person
+      </button>
     </div>
   );
 }
