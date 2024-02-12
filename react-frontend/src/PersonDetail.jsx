@@ -1,11 +1,21 @@
 import React from 'react';
+import { getOccupationColor } from './utils';
 
 function PersonDetail({ person }) {
+  const borderStyle = {
+    border: `3px solid ${getOccupationColor(person.occupation)}`,
+  };
+
+  const fontColorStyle = {
+    color: `${getOccupationColor(person.occupation)}`,
+    fontWeight: `bold`,
+  };
+
   return (
-    <div className="person-card">
+    <div className="person-card" style={borderStyle}>
       <h2>{person.name}</h2>
       <br />
-      <p>{person.occupation}</p>
+      <p style={fontColorStyle}>{person.occupation}</p>
       <p>
         {person.birthyear} - {person.deathyear}
       </p>
