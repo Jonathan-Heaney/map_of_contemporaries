@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PersonDetail from './PersonDetail';
+import React from 'react';
 
 function RandomPerson({ fetchRandomPerson, person }) {
   return (

@@ -39,6 +39,7 @@ function App() {
 
   return (
     <div className="Container">
+      <h1 className="title">Map of Contemporaries</h1>
       <RandomPerson
         fetchRandomPerson={fetchRandomPerson}
         person={randomPerson}
