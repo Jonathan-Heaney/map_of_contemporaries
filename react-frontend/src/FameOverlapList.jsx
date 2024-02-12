@@ -1,10 +1,10 @@
 import React from 'react';
 import PersonDetail from './PersonDetail';
 
-function FameOverlapList({ people }) {
+function FameOverlapList({ people, person }) {
   return (
     <div className="list fame-overlap-list">
-      <h1 className="list-title">Fame Overlap</h1>
+      {person && <h1 className="list-title">Fame Overlap</h1>}
       {people.map((person) => (
         <PersonDetail key={person.id} person={person} />
       ))}

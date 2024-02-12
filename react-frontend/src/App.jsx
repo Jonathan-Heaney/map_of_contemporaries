@@ -40,13 +40,20 @@ function App() {
   return (
     <div className="Container">
       <h1 className="title">Map of Contemporaries</h1>
+      <h3 className="explainer">
+        Click the button to generate a random historical figure and find out
+        whose lives overlapped with theirs!
+      </h3>
       <RandomPerson
         fetchRandomPerson={fetchRandomPerson}
         person={randomPerson}
       ></RandomPerson>
       <div className="lists">
-        <OverlapList people={overlapList}></OverlapList>
-        <FameOverlapList people={fameOverlapList}></FameOverlapList>
+        <OverlapList people={overlapList} person={randomPerson}></OverlapList>
+        <FameOverlapList
+          people={fameOverlapList}
+          person={randomPerson}
+        ></FameOverlapList>
       </div>
     </div>
   );
