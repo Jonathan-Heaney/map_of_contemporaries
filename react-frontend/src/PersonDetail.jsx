@@ -7,10 +7,15 @@ function PersonDetail({ person }) {
       <br />
       <p>{person.occupation}</p>
       <p>
-        {person.birthyear}-{person.deathyear}
+        {person.birthyear} - {person.deathyear}
       </p>
-      <p>Overlap Percentage: {person.overlap_percentage}%</p>
-      <p>Fame Score: {person.hpi}</p>
+      <p>
+        <span className="info">Overlap Percentage: </span>
+        {person.overlap_percentage}%
+      </p>
+      <p>
+        <span className="info">Fame Score:</span> {person.hpi}
+      </p>
       <br />
     </div>
   );

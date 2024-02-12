@@ -10,9 +10,11 @@ function RandomPerson({ fetchRandomPerson, person }) {
           <br />
           <p>{person.occupation}</p>
           <p>
-            {person.birthyear}-{person.deathyear}
+            {person.birthyear} - {person.deathyear}
           </p>
-          <p>Fame Score: {person.hpi}</p>
+          <p>
+            <span className="info">Fame Score:</span> {person.hpi}
+          </p>
         </div>
       )}
       <button className="generate-btn" onClick={fetchRandomPerson}>

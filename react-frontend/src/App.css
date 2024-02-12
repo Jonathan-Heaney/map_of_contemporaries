@@ -40,6 +40,11 @@ body {
   margin: 10px 0;
   padding: 10px;
   border-radius: 5px;
+  max-width: 100%;
+}
+
+.info {
+  font-weight: bold;
 }
 
 /* Lists alignment */
