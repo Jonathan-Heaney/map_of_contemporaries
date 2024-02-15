@@ -14,7 +14,10 @@ def generate_wikipedia_link(name):
 
 # Function to retrieve a random person from the database
 def random_person(request):
-    valid_persons = FamousPerson.objects.exclude(birthyear__isnull=True).exclude(deathyear__isnull=True).filter(hpi__gt=90)
+    # Get the minimum hpi from request parameters, default to 0 if not provided
+    min_hpi = request.GET.get('min_hpi', 0)
+
+    valid_persons = FamousPerson.objects.exclude(birthyear__isnull=True).exclude(deathyear__isnull=True).filter(hpi__gte=min_hpi)
     person_count = valid_persons.count()
     random_index = random.randint(0, person_count - 1)
     person = valid_persons.all()[random_index]
