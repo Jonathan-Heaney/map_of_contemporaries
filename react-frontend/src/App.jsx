@@ -7,7 +7,7 @@ import './App.css';
 
 function App() {
   const [randomPerson, setRandomPerson] = useState(null);
-  const [minHpi, setMinHpi] = useState(0);
+  const [minHpi, setMinHpi] = useState(50);
   const [overlapList, setOverlapList] = useState([]);
   const [fameOverlapList, setFameOverlapList] = useState([]);
 
@@ -52,14 +52,20 @@ function App() {
         fetchRandomPerson={fetchRandomPerson}
         person={randomPerson}
       ></RandomPerson>
-      <input
-        className="hpi-filter"
-        type="range"
-        min="50"
-        max="90"
-        value={minHpi}
-        onChange={(e) => setMinHpi(e.target.value)}
-      />
+      <div className="hpi-filter-container">
+        <label htmlFor="hpi-slider">
+          Minimum Fame Score: <span className="min-hpi">{minHpi}</span>
+        </label>
+        <input
+          id="hpi-slider"
+          className="hpi-filter"
+          type="range"
+          min="50"
+          max="90"
+          value={minHpi}
+          onChange={(e) => setMinHpi(e.target.value)}
+        />
+      </div>
       <div className="lists">
         <OverlapList people={overlapList} person={randomPerson}></OverlapList>
         <FameOverlapList

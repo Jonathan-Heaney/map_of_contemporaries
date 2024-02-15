@@ -26,6 +26,16 @@ body {
   font-size: 1rem;
 }
 
+.hpi-filter-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+}
+
+.min-hpi {
+  margin-right: 5px;
+}
+
 /* Centering the button and random person details */
 .random-person {
   text-align: center;
