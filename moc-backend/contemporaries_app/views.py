@@ -4,6 +4,13 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import FamousPerson
 import random
+import urllib.parse
+
+# Function to generate Wikipedia links for famous people
+def generate_wikipedia_link(name):
+    formatted_name = urllib.parse.quote(name.replace(" ", "_"))
+    return f"https://en.wikipedia.org/wiki/{formatted_name}"
+
 
 # Function to retrieve a random person from the database
 def random_person(request):
@@ -11,13 +18,15 @@ def random_person(request):
     person_count = valid_persons.count()
     random_index = random.randint(0, person_count - 1)
     person = valid_persons.all()[random_index]
+    person.wikipedia_link = generate_wikipedia_link(person.name)
     return JsonResponse({
         'id': person.id,
         'name': person.name,
         'occupation': person.occupation,
         'birthyear': person.birthyear,
         'deathyear': person.deathyear,
-        'hpi': person.hpi
+        'hpi': person.hpi,
+        'wikipedia_link': person.wikipedia_link
     })
 
 # Helper function to calculate the overlap percentage

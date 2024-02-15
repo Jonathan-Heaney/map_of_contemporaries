@@ -11,7 +11,9 @@ function RandomPerson({ fetchRandomPerson, person }) {
             border: `3px solid ${getOccupationColor(person.occupation)}`,
           }}
         >
-          <h2>{person.name}</h2>
+          <a href={person.wikipedia_link} target="blank">
+            <h2>{person.name}</h2>
+          </a>
           <br />
           <p style={{ color: getOccupationColor(person.occupation) }}>
             {person.occupation}
