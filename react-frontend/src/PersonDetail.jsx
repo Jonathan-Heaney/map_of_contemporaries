@@ -13,7 +13,9 @@ function PersonDetail({ person }) {
 
   return (
     <div className="person-card" style={borderStyle}>
-      <h2>{person.name}</h2>
+      <a href={person.wikipedia_link} target="blank">
+        <h2>{person.name}</h2>
+      </a>
       <br />
       <p style={fontColorStyle}>{person.occupation}</p>
       <p>

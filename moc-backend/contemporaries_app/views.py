@@ -52,6 +52,7 @@ def top_overlap(request, person_id):
     for person in all_people:
         overlap_percentage = calculate_overlap_percentage(chosen_person, person)
         overlaps.append((person, overlap_percentage))
+        person.wikipedia_link = generate_wikipedia_link(person.name)
     
     # Sort by overlap percentage and select top 10
     # x[1] is the second item in the tuple, which is the overlap percentage
@@ -68,7 +69,8 @@ def top_overlap(request, person_id):
         'occupation': person.occupation,
         'birthyear': person.birthyear,
         'deathyear': person.deathyear,
-        'hpi': person.hpi
+        'hpi': person.hpi,
+        'wikipedia_link': person.wikipedia_link
     } for person, overlap_percentage in top_overlaps]
 
     return JsonResponse(response_data, safe=False)
@@ -84,6 +86,7 @@ def fame_overlap(request, person_id):
         overlap_percentage = calculate_overlap_percentage(chosen_person, person)
         fame_overlap_score = overlap_percentage * (person.hpi ** 20)
         fame_overlaps.append((person, fame_overlap_score, overlap_percentage))
+        person.wikipedia_link = generate_wikipedia_link(person.name)
 
     fame_overlaps.sort(key=lambda x: x[1], reverse=True)
 
@@ -98,7 +101,8 @@ def fame_overlap(request, person_id):
         'occupation': person.occupation,
         'birthyear': person.birthyear,
         'deathyear': person.deathyear,
-        'hpi': person.hpi
+        'hpi': person.hpi,
+        'wikipedia_link': person.wikipedia_link
     } for person, fame_overlap_score, overlap_percentage in top_fame_overlaps]
 
     return JsonResponse(response_data, safe=False)
