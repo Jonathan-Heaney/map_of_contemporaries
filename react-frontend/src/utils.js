@@ -72,5 +72,6 @@ export const occupationColors = {
 export const defaultColor = '#95a5a6'; // Light Gray as a fallback
 
 export const getOccupationColor = (occupation) => {
-  return occupationColors[occupation] || defaultColor;
+  const formattedOccupation = occupation.replace(/\s+/g, '_').toUpperCase();
+  return occupationColors[formattedOccupation] || defaultColor;
 };
