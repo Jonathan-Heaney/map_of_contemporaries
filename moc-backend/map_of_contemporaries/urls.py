@@ -21,6 +21,8 @@ from contemporaries_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('random_person/', views.random_person, name='random_person'),
+    path('search_person/', views.search_person, name='search_person'),
     path('top_overlap/<int:person_id>/', views.top_overlap, name='top_overlap'),
-    path('fame_overlap/<int:person_id>/', views.fame_overlap, name='fame_overlap'),
+    path('fame_overlap/<int:person_id>/',
+         views.fame_overlap, name='fame_overlap'),
 ]

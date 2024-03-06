@@ -33,11 +33,11 @@ function SearchBar({ onSelect }) {
         placeholder="Search for a famous person..."
       />
       <ul>
-        {results.map((person) => {
+        {results.map((person) => (
           <li key={person.id} onClick={() => onSelect(person)}>
             {person.name}
-          </li>;
-        })}
+          </li>
+        ))}
       </ul>
     </div>
   );
