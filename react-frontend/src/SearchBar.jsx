@@ -4,6 +4,7 @@ import axios from 'axios';
 function SearchBar({ onSelect }) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const [searchPerformed, setSearchPerformed] = useState(false);
 
   useEffect(() => {
     if (query.length > 2) {
@@ -14,6 +15,7 @@ function SearchBar({ onSelect }) {
             `http://localhost:8000/search_person/?q=${query}`
           );
           setResults(response.data.results);
+          setSearchPerformed(true);
         } catch (error) {
           console.error('Error fetching search results:', error);
         }
@@ -21,6 +23,7 @@ function SearchBar({ onSelect }) {
       fetchResults();
     } else {
       setResults([]);
+      setSearchPerformed(false);
     }
   }, [query]);
 
@@ -39,6 +42,7 @@ function SearchBar({ onSelect }) {
           </li>
         ))}
       </ul>
+      {searchPerformed && results.length === 0 && <div>No people found.</div>}
     </div>
   );
 }
