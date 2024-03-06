@@ -3,12 +3,12 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import JsonResponse
 from .models import FamousPerson
+from django.db.models import Q
 import random
 import urllib.parse
 
+
 # Function to generate Wikipedia links for famous people
-
-
 def generate_wikipedia_link(name):
     formatted_name = urllib.parse.quote(name.replace(" ", "_"))
     return f"https://en.wikipedia.org/wiki/{formatted_name}"
@@ -35,9 +35,8 @@ def random_person(request):
         'wikipedia_link': person.wikipedia_link
     })
 
+
 # Helper function to calculate the overlap percentage
-
-
 def calculate_overlap_percentage(person1, person2):
     # Check for None values in birth and death years
     if None in (person1.birthyear, person1.deathyear, person2.birthyear, person2.deathyear):
@@ -117,3 +116,15 @@ def fame_overlap(request, person_id):
     } for person, fame_overlap_score, overlap_percentage in top_fame_overlaps]
 
     return JsonResponse(response_data, safe=False)
+
+
+# Add search functionality
+def search_person(request):
+    query = request.GET.get('q', '')
+    if query:
+        results = FamousPerson.objects.filter(Q(name__icontains=query))
+        data = list(results.values('id', 'name', 'occupation',
+                    'birthyear', 'deathyear', 'hpi'))
+        return JsonResponse({'results': data})
+    else:
+        return JsonResponse({'error': 'No query provided'}, status=400)
