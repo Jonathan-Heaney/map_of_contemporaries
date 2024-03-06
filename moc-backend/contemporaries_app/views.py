@@ -122,7 +122,8 @@ def fame_overlap(request, person_id):
 def search_person(request):
     query = request.GET.get('q', '')
     if query:
-        results = FamousPerson.objects.filter(Q(name__icontains=query))
+        results = FamousPerson.objects.filter(Q(name__icontains=query))[
+            :10]  # Limit to top 10
         data = list(results.values('id', 'name', 'occupation',
                     'birthyear', 'deathyear', 'hpi'))
         return JsonResponse({'results': data})
