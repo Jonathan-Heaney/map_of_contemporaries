@@ -81,7 +81,7 @@ body {
 }
 
 .no-results {
-  padding: 10px;
+  padding: 20px;
   text-align: center;
   color: #666; /* Dark grey for the "No results" message */
 }

@@ -8,19 +8,17 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [randomPerson, setRandomPerson] = useState(null);
+  const [currentPerson, setCurrentPerson] = useState(null);
   const [minHpi, setMinHpi] = useState(50);
   const [overlapList, setOverlapList] = useState([]);
   const [fameOverlapList, setFameOverlapList] = useState([]);
-  const [selectedPerson, setSelectedPerson] = useState(null);
 
   const fetchRandomPerson = async () => {
     try {
-      console.log(minHpi);
       const response = await axios.get(
         `http://localhost:8000/random_person/?min_hpi=${minHpi}`
       );
-      setRandomPerson(response.data);
+      setCurrentPerson(response.data);
 
       fetchOverlapLists(response.data.id);
     } catch (error) {
@@ -45,7 +43,7 @@ function App() {
   };
 
   const handleSelectPerson = (person) => {
-    setSelectedPerson(person);
+    setCurrentPerson(person);
     fetchOverlapLists(person.id);
   };
 
@@ -53,18 +51,15 @@ function App() {
     <div className="Container">
       <h1 className="title">Map of Contemporaries</h1>
       <h3 className="explainer">
-        Click the button to generate a random historical figure and find out
-        whose lives overlapped with theirs!
+        Search for a famous historical figure (or click the button to generate a
+        random one) and find out whose lives overlapped with theirs!
       </h3>
       <div>
         <SearchBar onSelect={handleSelectPerson}></SearchBar>
-        {selectedPerson && (
-          <PersonDetail person={selectedPerson}></PersonDetail>
-        )}
       </div>
       <RandomPerson
         fetchRandomPerson={fetchRandomPerson}
-        person={randomPerson}
+        person={currentPerson}
       ></RandomPerson>
       <div className="hpi-filter-container">
         <label htmlFor="hpi-slider">
@@ -82,10 +77,10 @@ function App() {
       </div>
 
       <div className="lists">
-        <OverlapList people={overlapList} person={randomPerson}></OverlapList>
+        <OverlapList people={overlapList} person={currentPerson}></OverlapList>
         <FameOverlapList
           people={fameOverlapList}
-          person={randomPerson}
+          person={currentPerson}
         ></FameOverlapList>
       </div>
     </div>

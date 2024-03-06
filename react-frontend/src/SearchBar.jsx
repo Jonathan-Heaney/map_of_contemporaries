@@ -49,7 +49,9 @@ function SearchBar({ onSelect }) {
           </li>
         ))}
       </ul>
-      {searchPerformed && results.length === 0 && <div>No people found.</div>}
+      {searchPerformed && results.length === 0 && (
+        <div className="no-results">No people found.</div>
+      )}
     </div>
   );
 }
