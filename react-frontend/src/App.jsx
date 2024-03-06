@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import RandomPerson from './RandomPerson';
+import PersonDetail from './PersonDetail';
 import OverlapList from './OverlapList';
 import FameOverlapList from './FameOverlapList';
+import SearchBar from './SearchBar';
 import axios from 'axios';
 import './App.css';
 
@@ -10,6 +12,7 @@ function App() {
   const [minHpi, setMinHpi] = useState(50);
   const [overlapList, setOverlapList] = useState([]);
   const [fameOverlapList, setFameOverlapList] = useState([]);
+  const [selectedPerson, setSelectedPerson] = useState(null);
 
   const fetchRandomPerson = async () => {
     try {
@@ -41,6 +44,11 @@ function App() {
     }
   };
 
+  const handleSelectPerson = (person) => {
+    setSelectedPerson(person);
+    fetchOverlapLists(person.id);
+  };
+
   return (
     <div className="Container">
       <h1 className="title">Map of Contemporaries</h1>
@@ -48,6 +56,12 @@ function App() {
         Click the button to generate a random historical figure and find out
         whose lives overlapped with theirs!
       </h3>
+      <div>
+        <SearchBar onSelect={handleSelectPerson}></SearchBar>
+        {selectedPerson && (
+          <PersonDetail person={selectedPerson}></PersonDetail>
+        )}
+      </div>
       <RandomPerson
         fetchRandomPerson={fetchRandomPerson}
         person={randomPerson}
@@ -66,6 +80,7 @@ function App() {
           onChange={(e) => setMinHpi(e.target.value)}
         />
       </div>
+
       <div className="lists">
         <OverlapList people={overlapList} person={randomPerson}></OverlapList>
         <FameOverlapList
