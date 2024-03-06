@@ -56,6 +56,12 @@ function App() {
         Click the button to generate a random historical figure and find out
         whose lives overlapped with theirs!
       </h3>
+      <div>
+        <SearchBar onSelect={handleSelectPerson}></SearchBar>
+        {selectedPerson && (
+          <PersonDetail person={selectedPerson}></PersonDetail>
+        )}
+      </div>
       <RandomPerson
         fetchRandomPerson={fetchRandomPerson}
         person={randomPerson}
@@ -74,12 +80,7 @@ function App() {
           onChange={(e) => setMinHpi(e.target.value)}
         />
       </div>
-      <div>
-        <SearchBar onSelect={handleSelectPerson}></SearchBar>
-        {selectedPerson && (
-          <PersonDetail person={selectedPerson}></PersonDetail>
-        )}
-      </div>
+
       <div className="lists">
         <OverlapList people={overlapList} person={randomPerson}></OverlapList>
         <FameOverlapList
