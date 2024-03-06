@@ -28,7 +28,7 @@ function SearchBar({ onSelect }) {
   }, [query]);
 
   return (
-    <div>
+    <div className="search-container">
       <input
         type="text"
         value={query}

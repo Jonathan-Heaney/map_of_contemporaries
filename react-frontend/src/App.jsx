@@ -73,12 +73,14 @@ function App() {
           onChange={(e) => setMinHpi(e.target.value)}
         />
       </div>
-      <SearchBar onSelect={handleSelectPerson}></SearchBar>
-      {selectedPerson && (
-        <div>
-          <h2>Selected Person: {selectedPerson.name}</h2>
-        </div>
-      )}
+      <div>
+        <SearchBar onSelect={handleSelectPerson}></SearchBar>
+        {selectedPerson && (
+          <div>
+            <h2>Selected Person: {selectedPerson.name}</h2>
+          </div>
+        )}
+      </div>
       <div className="lists">
         <OverlapList people={overlapList} person={randomPerson}></OverlapList>
         <FameOverlapList
