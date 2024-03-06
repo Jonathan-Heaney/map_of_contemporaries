@@ -12,6 +12,8 @@ function App() {
   const [minHpi, setMinHpi] = useState(50);
   const [overlapList, setOverlapList] = useState([]);
   const [fameOverlapList, setFameOverlapList] = useState([]);
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
 
   const fetchRandomPerson = async () => {
     try {
@@ -21,6 +23,9 @@ function App() {
       setCurrentPerson(response.data);
 
       fetchOverlapLists(response.data.id);
+      // Reset search state
+      setQuery('');
+      setResults([]);
     } catch (error) {
       console.error('There was an error fetching the random person:', error);
     }
@@ -55,7 +60,13 @@ function App() {
         random one) and find out whose lives overlapped with theirs!
       </h3>
       <div>
-        <SearchBar onSelect={handleSelectPerson}></SearchBar>
+        <SearchBar
+          query={query}
+          setQuery={setQuery}
+          results={results}
+          setResults={setResults}
+          onSelect={handleSelectPerson}
+        ></SearchBar>
       </div>
       <RandomPerson
         fetchRandomPerson={fetchRandomPerson}
