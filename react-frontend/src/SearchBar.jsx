@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function SearchBar({ onSelect }) {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+function SearchBar({ query, setQuery, results, setResults, onSelect }) {
   const [searchPerformed, setSearchPerformed] = useState(false);
 
   useEffect(() => {
