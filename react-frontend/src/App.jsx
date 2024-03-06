@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import RandomPerson from './RandomPerson';
+import PersonDetail from './PersonDetail';
 import OverlapList from './OverlapList';
 import FameOverlapList from './FameOverlapList';
 import SearchBar from './SearchBar';
@@ -76,9 +77,7 @@ function App() {
       <div>
         <SearchBar onSelect={handleSelectPerson}></SearchBar>
         {selectedPerson && (
-          <div>
-            <h2>Selected Person: {selectedPerson.name}</h2>
-          </div>
+          <PersonDetail person={selectedPerson}></PersonDetail>
         )}
       </div>
       <div className="lists">

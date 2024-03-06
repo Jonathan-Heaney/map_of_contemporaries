@@ -27,6 +27,13 @@ function SearchBar({ onSelect }) {
     }
   }, [query]);
 
+  function handleSelect(person) {
+    setResults([]);
+    setSearchPerformed(false);
+    setQuery('');
+    onSelect(person);
+  }
+
   return (
     <div className="search-container">
       <input
@@ -37,7 +44,7 @@ function SearchBar({ onSelect }) {
       />
       <ul>
         {results.map((person) => (
-          <li key={person.id} onClick={() => onSelect(person)}>
+          <li key={person.id} onClick={() => handleSelect(person)}>
             {person.name} ({person.birthyear}-{person.deathyear})
           </li>
         ))}
