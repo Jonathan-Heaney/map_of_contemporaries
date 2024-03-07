@@ -28,6 +28,10 @@ function PersonDetail({ person }) {
         </p>
       )}
       <p>
+        <span className="info">Overlap Years: </span> {person.overlap_start} -{' '}
+        {person.overlap_end} ({person.overlap_years} years)
+      </p>
+      <p>
         <span className="info">Fame Score:</span> {person.hpi}
       </p>
       <br />

@@ -53,7 +53,7 @@ def calculate_overlap_percentage(person1, person2):
 
 def calculate_overlap_start(person1, person2):
     if None in (person1.birthyear, person1.deathyear, person2.birthyear, person2.deathyear):
-        return None
+        return 0
 
     latest_start = max(person1.birthyear, person2.birthyear)
     return latest_start
@@ -61,7 +61,7 @@ def calculate_overlap_start(person1, person2):
 
 def calculate_overlap_end(person1, person2):
     if None in (person1.birthyear, person1.deathyear, person2.birthyear, person2.deathyear):
-        return None
+        return 0
 
     earliest_end = min(person1.deathyear, person2.deathyear)
     return earliest_end
