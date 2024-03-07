@@ -49,6 +49,8 @@ function App() {
 
   const handleSelectPerson = (person) => {
     setCurrentPerson(person);
+    console.log('working');
+    console.log('Person', person.name);
     fetchOverlapLists(person.id);
   };
 
@@ -88,10 +90,15 @@ function App() {
       </div>
 
       <div className="lists">
-        <OverlapList people={overlapList} person={currentPerson}></OverlapList>
+        <OverlapList
+          people={overlapList}
+          person={currentPerson}
+          handleSelectPerson={handleSelectPerson}
+        ></OverlapList>
         <FameOverlapList
           people={fameOverlapList}
           person={currentPerson}
+          handleSelectPerson={handleSelectPerson}
         ></FameOverlapList>
       </div>
     </div>

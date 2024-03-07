@@ -1,7 +1,11 @@
 import React from 'react';
 import { getOccupationColor } from './utils';
 
-function PersonDetail({ person }) {
+function PersonDetail({ person, handleSelectPerson }) {
+  function handleFindContemporaries(person) {
+    handleSelectPerson(person);
+  }
+
   const borderStyle = {
     border: `3px solid ${getOccupationColor(person.occupation)}`,
   };
@@ -35,6 +39,9 @@ function PersonDetail({ person }) {
         <span className="info">Fame Score:</span> {person.hpi}
       </p>
       <br />
+      <button className="generate-btn" onClick={handleFindContemporaries}>
+        Find Contemporaries
+      </button>
     </div>
   );
 }
