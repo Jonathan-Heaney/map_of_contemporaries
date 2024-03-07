@@ -49,8 +49,6 @@ function App() {
 
   const handleSelectPerson = (person) => {
     setCurrentPerson(person);
-    console.log('working');
-    console.log('Person', person.name);
     fetchOverlapLists(person.id);
   };
 
