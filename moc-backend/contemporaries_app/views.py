@@ -87,6 +87,42 @@ def calculate_overlap(person1, person2):
     return OverlapResult(percentage, latest_start, earliest_end, overlap_years)
 
 
+def prepare_person_data(person, extra_data=None):
+    extra_data = extra_data or {}
+    wikipedia_link = generate_wikipedia_link(person.name)
+    person_data = {
+        'id': person.id,
+        'name': person.name,
+        'occupation': person.occupation,
+        'birthyear': person.birthyear,
+        'deathyear': person.deathyear,
+        'hpi': person.hpi,
+        'wikipedia_link': wikipedia_link,
+    }
+    person_data.update(extra_data)
+    return person_data
+
+
+def calculate_overlaps(chosen_person, score_func):
+    all_people = FamousPerson.objects.exclude(id=chosen_person.id)
+    overlaps = []
+
+    for person in all_people:
+        overlap_result = calculate_overlap(chosen_person, person)
+        score = score_func(overlap_result, person)
+        overlaps.append((person, score) + overlap_result)
+
+    return overlaps
+
+
+def overlap_score(overlap_result, person):
+    return overlap_result.percentage
+
+
+def fame_overlap_score(overlap_result, person):
+    return overlap_result.percentage * (person.hpi ** 20)
+
+
 # def top_overlap(request, person_id):
 #     chosen_person = FamousPerson.objects.get(id=person_id)
 #     all_people = FamousPerson.objects.exclude(id=person_id)
