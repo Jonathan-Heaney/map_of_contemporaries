@@ -1,5 +1,5 @@
 import React from 'react';
-import { getOccupationColor } from './utils';
+import { getOccupationColor, formatYears } from './utils';
 
 function RandomPerson({ fetchRandomPerson, person }) {
   return (
@@ -18,9 +18,7 @@ function RandomPerson({ fetchRandomPerson, person }) {
           <p style={{ color: getOccupationColor(person.occupation) }}>
             {person.occupation}
           </p>
-          <p>
-            {person.birthyear} - {person.deathyear}
-          </p>
+          <p>{formatYears(person.birthyear, person.deathyear)}</p>
           <p>
             <span className="info">Fame Score:</span> {person.hpi}
           </p>

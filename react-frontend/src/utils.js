@@ -75,3 +75,17 @@ export const getOccupationColor = (occupation) => {
   const formattedOccupation = occupation.replace(/\s+/g, '_').toUpperCase();
   return occupationColors[formattedOccupation] || defaultColor;
 };
+
+export const formatYears = (birthyear, deathyear) => {
+  // If both years are AD, omit AD suffix
+  if (birthyear > 0) {
+    return `${birthyear} - ${deathyear}`;
+  }
+
+  const formatYear = (year) => Math.abs(year) + (year < 0 ? ' BC' : ' AD');
+
+  let formattedBirthyear = formatYear(birthyear);
+  let formattedDeathyear = formatYear(deathyear);
+
+  return `${formattedBirthyear} - ${formattedDeathyear}`;
+};

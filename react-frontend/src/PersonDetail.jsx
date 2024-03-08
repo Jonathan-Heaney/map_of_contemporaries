@@ -1,5 +1,5 @@
 import React from 'react';
-import { getOccupationColor } from './utils';
+import { getOccupationColor, formatYears } from './utils';
 
 function PersonDetail({ person, handleSelectPerson }) {
   const borderStyle = {
@@ -11,6 +11,8 @@ function PersonDetail({ person, handleSelectPerson }) {
     fontWeight: `bold`,
   };
 
+  const dateString = formatYears(person.birthyear, person.deathyear);
+
   return (
     <div className="person-card" style={borderStyle}>
       <a href={person.wikipedia_link} target="blank">
@@ -18,9 +20,7 @@ function PersonDetail({ person, handleSelectPerson }) {
       </a>
       <br />
       <p style={fontColorStyle}>{person.occupation}</p>
-      <p>
-        {person.birthyear} - {person.deathyear}
-      </p>
+      <p>{dateString}</p>
       {person.overlap_percentage > 0 && (
         <p>
           <span className="info">Overlap Percentage: </span>
