@@ -50,6 +50,7 @@ function App() {
   const handleSelectPerson = (person) => {
     setCurrentPerson(person);
     fetchOverlapLists(person.id);
+    console.log(person.name, person.wikipedia_link);
   };
 
   return (
