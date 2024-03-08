@@ -155,18 +155,19 @@ def search_person(request):
         results = FamousPerson.objects.filter(Q(name__icontains=query))[
             :10]  # Limit to top 10
 
+        data = []
         for person in results:
-            person.wikipedia_link = generate_wikipedia_link(person.name)
-        response_data = [{
-            'id': person.id,
-            'name': person.name,
-            'occupation': person.occupation,
-            'birthyear': person.birthyear,
-            'deathyear': person.deathyear,
-            'hpi': person.hpi,
-            'wikipedia_link': person.wikipedia_link
-        } for person in results]
-
-        return JsonResponse(response_data, safe=False)
+            wikipedia_link = generate_wikipedia_link(person.name)
+            person_data = {
+                'id': person.id,
+                'name': person.name,
+                'occupation': person.occupation,
+                'birthyear': person.birthyear,
+                'deathyear': person.deathyear,
+                'hpi': person.hpi,
+                'wikipedia_link': wikipedia_link,
+            }
+            data.append(person_data)
+        return JsonResponse({'results': data})
     else:
         return JsonResponse({'error': 'No query provided'}, status=400)
