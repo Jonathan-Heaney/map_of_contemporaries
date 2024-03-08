@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseNotFound
 from .models import FamousPerson
 from django.db.models import Q
 import random
@@ -20,21 +20,27 @@ def random_person(request):
     # Get the minimum hpi from request parameters, default to 50 if not provided
     min_hpi = int(request.GET.get('min_hpi', 50))
 
-    valid_persons = FamousPerson.objects.exclude(birthyear__isnull=True).exclude(
-        deathyear__isnull=True).filter(hpi__gte=min_hpi)
+    # Filter valid persons directly, reducing database hits by calling 'all()' once
+    valid_persons = FamousPerson.objects.exclude(
+        birthyear__isnull=True
+    ).exclude(
+        deathyear__isnull=True
+    ).filter(
+        hpi__gte=min_hpi
+    )
+
     person_count = valid_persons.count()
+    if person_count == 0:
+        # Handle case where no persons meet the criteria
+        return HttpResponseNotFound({'error': 'No persons found matching criteria'})
+
     random_index = random.randint(0, person_count - 1)
-    person = valid_persons.all()[random_index]
-    person.wikipedia_link = generate_wikipedia_link(person.name)
-    return JsonResponse({
-        'id': person.id,
-        'name': person.name,
-        'occupation': person.occupation,
-        'birthyear': person.birthyear,
-        'deathyear': person.deathyear,
-        'hpi': person.hpi,
-        'wikipedia_link': person.wikipedia_link
-    })
+    person = valid_persons[random_index]  # Direct indexing on the queryset
+
+    # Utilize the prepare_person_data function to construct response data
+    response_data = prepare_person_data(person)
+
+    return JsonResponse(response_data)
 
 
 OverlapResult = namedtuple(
