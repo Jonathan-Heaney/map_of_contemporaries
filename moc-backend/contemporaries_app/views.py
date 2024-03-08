@@ -37,37 +37,6 @@ def random_person(request):
     })
 
 
-# # Helper function to calculate the overlap percentage
-# def calculate_overlap_percentage(person1, person2):
-#     # Check for None values in birth and death years
-#     if None in (person1.birthyear, person1.deathyear, person2.birthyear, person2.deathyear):
-#         return 0
-
-#     latest_start = max(person1.birthyear, person2.birthyear)
-#     earliest_end = min(person1.deathyear, person2.deathyear)
-#     overlap = max(0, earliest_end - latest_start)
-#     person1_lifespan = person1.deathyear - person1.birthyear
-#     overlap_percentage = (overlap / person1_lifespan) * \
-#         100 if person1_lifespan > 0 else 0
-#     return round(overlap_percentage, 2)
-
-
-# def calculate_overlap_start(person1, person2):
-#     if None in (person1.birthyear, person1.deathyear, person2.birthyear, person2.deathyear):
-#         return 0
-
-#     latest_start = max(person1.birthyear, person2.birthyear)
-#     return latest_start
-
-
-# def calculate_overlap_end(person1, person2):
-#     if None in (person1.birthyear, person1.deathyear, person2.birthyear, person2.deathyear):
-#         return 0
-
-#     earliest_end = min(person1.deathyear, person2.deathyear)
-#     return earliest_end
-
-
 OverlapResult = namedtuple(
     'OverlapResult', ['percentage', 'start', 'end', 'years'])
 
@@ -245,19 +214,8 @@ def search_person(request):
         results = FamousPerson.objects.filter(Q(name__icontains=query))[
             :10]  # Limit to top 10
 
-        data = []
-        for person in results:
-            wikipedia_link = generate_wikipedia_link(person.name)
-            person_data = {
-                'id': person.id,
-                'name': person.name,
-                'occupation': person.occupation,
-                'birthyear': person.birthyear,
-                'deathyear': person.deathyear,
-                'hpi': person.hpi,
-                'wikipedia_link': wikipedia_link,
-            }
-            data.append(person_data)
+        data = [prepare_person_data(person) for person in results]
+
         return JsonResponse({'results': data})
     else:
         return JsonResponse({'error': 'No query provided'}, status=400)
