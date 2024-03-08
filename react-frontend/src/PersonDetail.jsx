@@ -25,10 +25,10 @@ function PersonDetail({ person, handleSelectPerson }) {
       <br />
       <p style={fontColorStyle}>{person.occupation}</p>
       <p>{dateString}</p>
-      {person.overlap_percentage > 0 && (
+      {person.percentage > 0 && (
         <p>
           <span className="info">Overlap Percentage: </span>
-          {person.overlap_percentage}%
+          {person.percentage}%
         </p>
       )}
       <p>
