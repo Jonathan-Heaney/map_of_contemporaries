@@ -123,6 +123,40 @@ def fame_overlap_score(overlap_result, person):
     return overlap_result.percentage * (person.hpi ** 20)
 
 
+def top_overlap(request, person_id):
+    chosen_person = FamousPerson.objects.get(id=person_id)
+    overlaps = calculate_overlaps(chosen_person, overlap_score)
+    overlaps.sort(key=lambda x: x[1], reverse=True)
+    top_overlaps = overlaps[:10]
+
+    response_data = [prepare_person_data(person, {
+        'overlap_score': score,
+        'percentage': overlap_result.percentage,
+        'start': overlap_result.start,
+        'end': overlap_result.end,
+        'years': overlap_result.years,
+    }) for person, score, overlap_result in top_overlaps]
+
+    return JsonResponse(response_data, safe=False)
+
+
+def fame_overlap(request, person_id):
+    chosen_person = FamousPerson.objects.get(id=person_id)
+    fame_overlaps = calculate_overlaps(chosen_person, fame_overlap_score)
+    fame_overlaps.sort(key=lambda x: x[1], reverse=True)
+    top_fame_overlaps = fame_overlaps[:10]
+
+    response_data = [prepare_person_data(person, {
+        'fame_overlap_score': score,
+        'percentage': overlap_result.percentage,
+        'start': overlap_result.start,
+        'end': overlap_result.end,
+        'years': overlap_result.years,
+    }) for person, score, overlap_result in top_fame_overlaps]
+
+    return JsonResponse(response_data, safe=False)
+
+
 # def top_overlap(request, person_id):
 #     chosen_person = FamousPerson.objects.get(id=person_id)
 #     all_people = FamousPerson.objects.exclude(id=person_id)
