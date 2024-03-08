@@ -110,7 +110,7 @@ def calculate_overlaps(chosen_person, score_func):
     for person in all_people:
         overlap_result = calculate_overlap(chosen_person, person)
         score = score_func(overlap_result, person)
-        overlaps.append((person, score) + overlap_result)
+        overlaps.append((person, score, overlap_result))
 
     return overlaps
 
@@ -238,26 +238,26 @@ def fame_overlap(request, person_id):
 #     return JsonResponse(response_data, safe=False)
 
 
-# # Add search functionality
-# def search_person(request):
-#     query = request.GET.get('q', '')
-#     if query:
-#         results = FamousPerson.objects.filter(Q(name__icontains=query))[
-#             :10]  # Limit to top 10
+# Add search functionality
+def search_person(request):
+    query = request.GET.get('q', '')
+    if query:
+        results = FamousPerson.objects.filter(Q(name__icontains=query))[
+            :10]  # Limit to top 10
 
-#         data = []
-#         for person in results:
-#             wikipedia_link = generate_wikipedia_link(person.name)
-#             person_data = {
-#                 'id': person.id,
-#                 'name': person.name,
-#                 'occupation': person.occupation,
-#                 'birthyear': person.birthyear,
-#                 'deathyear': person.deathyear,
-#                 'hpi': person.hpi,
-#                 'wikipedia_link': wikipedia_link,
-#             }
-#             data.append(person_data)
-#         return JsonResponse({'results': data})
-#     else:
-#         return JsonResponse({'error': 'No query provided'}, status=400)
+        data = []
+        for person in results:
+            wikipedia_link = generate_wikipedia_link(person.name)
+            person_data = {
+                'id': person.id,
+                'name': person.name,
+                'occupation': person.occupation,
+                'birthyear': person.birthyear,
+                'deathyear': person.deathyear,
+                'hpi': person.hpi,
+                'wikipedia_link': wikipedia_link,
+            }
+            data.append(person_data)
+        return JsonResponse({'results': data})
+    else:
+        return JsonResponse({'error': 'No query provided'}, status=400)
