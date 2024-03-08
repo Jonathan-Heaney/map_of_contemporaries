@@ -44,7 +44,7 @@ function SearchBar({ query, setQuery, results, setResults, onSelect }) {
       <ul>
         {results.map((person) => (
           <li key={person.id} onClick={() => handleSelect(person)}>
-            {person.name} ({person.birthyear}-{person.deathyear})
+            {person.name} ({formatYears(person.birthyear, person.deathyear)})
           </li>
         ))}
       </ul>
