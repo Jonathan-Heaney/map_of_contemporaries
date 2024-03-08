@@ -11,11 +11,15 @@ function PersonDetail({ person, handleSelectPerson }) {
     fontWeight: `bold`,
   };
 
+  const linkColorStyle = {
+    color: `${getOccupationColor(person.occupation)}`,
+  };
+
   const dateString = formatYears(person.birthyear, person.deathyear);
 
   return (
     <div className="person-card" style={borderStyle}>
-      <a href={person.wikipedia_link} target="blank">
+      <a style={linkColorStyle} href={person.wikipedia_link} target="blank">
         <h2>{person.name}</h2>
       </a>
       <br />
