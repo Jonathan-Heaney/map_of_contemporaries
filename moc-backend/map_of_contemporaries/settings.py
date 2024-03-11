@@ -24,6 +24,13 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Tells Django where to collect all static files (React build files)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static files')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '../react-frontend/build/static'),
+]
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -93,7 +100,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': DB_NAME,       # The name of your database
         'USER': DB_USERNAME,       # The username you created
-        'PASSWORD': DB_PASSWORD, # The password for the username
+        'PASSWORD': DB_PASSWORD,  # The password for the username
         'HOST': 'localhost',      # Set to your database host
         'PORT': '',               # Leave as an empty string to use the default port
     }
