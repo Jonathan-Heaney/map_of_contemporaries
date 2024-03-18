@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 static/react
 staticfiles
+django-contemp-venv
