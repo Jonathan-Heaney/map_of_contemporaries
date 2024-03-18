@@ -25,10 +25,10 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Tells Django where to collect all static files (React build files)
-STATIC_ROOT = os.path.join(BASE_DIR, 'static files')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../react-frontend/build/static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 
