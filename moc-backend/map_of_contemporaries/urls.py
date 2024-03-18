@@ -15,8 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from contemporaries_app import views
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +28,5 @@ urlpatterns = [
     path('top_overlap/<int:person_id>/', views.top_overlap, name='top_overlap'),
     path('fame_overlap/<int:person_id>/',
          views.fame_overlap, name='fame_overlap'),
-]
+    path('', views.FrontendAppView.as_view()),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

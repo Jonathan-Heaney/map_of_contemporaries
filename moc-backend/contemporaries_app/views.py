@@ -1,12 +1,31 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import JsonResponse, HttpResponseNotFound
+from django.http import JsonResponse, HttpResponseNotFound, HttpResponse
+from django.views.generic import View
+from django.conf import settings
+import os
 from .models import FamousPerson
 from django.db.models import Q
 import random
 import urllib.parse
 from collections import namedtuple
+
+
+# Serve React app
+class FrontendAppView(View):
+    def get(self, request):
+        try:
+            with open(os.path.join(settings.REACT_APP_DIR, 'index.html')) as f:
+                return HttpResponse(f.read())
+        except FileNotFoundError:
+            return HttpResponse(
+                """
+                This URL is supposed to serve the index.html of the built React app,
+                but no such file was found. Ensure your React app was built. 
+                """,
+                status=501,
+            )
 
 
 # Function to generate Wikipedia links for famous people

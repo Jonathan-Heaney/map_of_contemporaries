@@ -11,5 +11,6 @@ export default defineConfig({
     outDir: djangoStaticDir,
     // Set the base path for the application
     base: '/static/react/',
+    assetsDir: 'assets',
   },
 });
