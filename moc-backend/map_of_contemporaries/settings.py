@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from os import getenv
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -40,12 +41,14 @@ REACT_APP_DIR = os.path.join(BASE_DIR, 'static/react')
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5#fisu390ih9-c8)jf4$=t!&zi!z)q)z0)%5i2hyd0zyc4uayt'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv("IS_DEVELOPMENT", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    getenv("APP_HOST"), '127.0.0.1', 'localhost'
+]
 
 
 # Application definition
@@ -102,10 +105,9 @@ WSGI_APPLICATION = 'map_of_contemporaries.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,       # The name of your database
-        'USER': DB_USERNAME,       # The username you created
-        'PASSWORD': DB_PASSWORD,  # The password for the username
-        # Set to your database host
+        'NAME': DB_NAME,
+        'USER': DB_USERNAME,
+        'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
         'PORT': DB_PORT,
     }
