@@ -4,6 +4,7 @@ __pycache__/
 static/react
 staticfiles
 django-contemp-venv
+*.zip
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
