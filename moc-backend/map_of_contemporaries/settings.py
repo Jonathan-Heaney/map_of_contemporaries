@@ -47,8 +47,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = getenv("IS_DEVELOPMENT", True)
 
 ALLOWED_HOSTS = [
-    # 'www.contemporari.es', 'localhost', '127.0.0.1', '.elasticbeanstalk.com'
-    '*'
+    'www.contemporari.es', 'localhost', '127.0.0.1', '.elasticbeanstalk.com'
 ]
 
 
