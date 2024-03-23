@@ -47,7 +47,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = getenv("IS_DEVELOPMENT", True)
 
 ALLOWED_HOSTS = [
-    'www.contemporari.es', 'localhost', '127.0.0.1', '.elasticbeanstalk.com'
+    # 'www.contemporari.es', 'localhost', '127.0.0.1', '.elasticbeanstalk.com'
+    '*'
 ]
 
 
@@ -143,6 +144,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 
 # Static files (CSS, JavaScript, Images)

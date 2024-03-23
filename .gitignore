@@ -1,12 +1,4 @@
-.env
-__pycache__/
-*.pyc
-static/react
-staticfiles
-django-contemp-venv
-*.zip
-*.config
-.platform
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
