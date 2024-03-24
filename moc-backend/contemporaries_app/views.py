@@ -16,11 +16,20 @@ from collections import namedtuple
 class FrontendAppView(View):
     def get(self, request):
         try:
-            with open(os.path.join(settings.REACT_APP_DIR, 'index.html')) as f:
+            p = os.path.join(settings.REACT_APP_DIR, 'index.html')
+            with open(p) as f:
+
                 return HttpResponse(f.read())
         except FileNotFoundError:
+            l = ""
+            for root, dirs, files in os.walk(settings.REACT_APP_DIR):
+                for file in files:
+                    l += (os.path.join(root, file)) + "<br>"
+
             return HttpResponse(
-                """
+                f""" Path {p}
+                Directory listing {l}
+
                 This URL is supposed to serve the index.html of the built React app,
                 but no such file was found. Ensure your React app was built. 
                 """,

@@ -35,7 +35,7 @@ STATICFILES_DIRS = [
 ]
 
 
-REACT_APP_DIR = os.path.join(BASE_DIR, 'static/react')
+REACT_APP_DIR = os.path.join(BASE_DIR, 'staticfiles/react')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -47,7 +47,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = getenv("IS_DEVELOPMENT", True)
 
 ALLOWED_HOSTS = [
-    'www.contemporari.es', 'localhost', '127.0.0.1', '.elasticbeanstalk.com'
+    'www.contemporari.es', 'localhost', '127.0.0.1', '.elasticbeanstalk.com', '3.141.119.75'
 ]
 
 
@@ -153,7 +153,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
